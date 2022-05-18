@@ -6,11 +6,10 @@ import java.util.*;
 
 public class Salas {
 	private boolean visitado;
-	
 	private ArrayList<Componente> componentes;
 	
-	public Salas() {
-		this.setComponentes(new ArrayList<Componente>());
+	public Salas(int linha, int coluna, Caverna caverna) {
+		this.setComponentes(new ArrayList<Componente>(Arrays.asList(new Componente(linha, coluna, caverna))));
 		this.visitado = false;
 	}
 	
@@ -77,6 +76,10 @@ public class Salas {
 	
 	public void push_back(Componente c) {
 		this.getComponentes().add(c);
+	}
+	
+	public boolean isVisitado() {
+		return this.visitado;
 	}
 	
 	public void setVisitado(boolean v) {

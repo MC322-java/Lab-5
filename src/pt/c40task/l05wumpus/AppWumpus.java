@@ -37,30 +37,29 @@ public class AppWumpus {
 //			  {"4", "3", "_"},
 //			  {"4", "4", "O"}
 //	  };
-      Caverna caverna = Montador.montaCaverna(cave);
-      Heroi heroi = new Heroi(0, 0);
-	  caverna.cave[0][0].setVisitado(true);
-	  caverna.cave[0][0].interagir();
+      Caverna caverna = new Caverna();
+      Montador.montaCaverna(caverna, cave);
 	  caverna.atualizaCaverna();
-      ControleJogo jogo = new ControleJogo();
+      ControleJogo jogo = new ControleJogo(new Heroi(0, 0, caverna));
       if (jogo.cavernaValida(caverna)) {
     	  System.out.println("Caverna invalida");
       }
-//      jogo.printa(caverna);
-      tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
+      caverna.getSalas()[0][0].setVisitado(true);
+      caverna.getSalas()[0][0].interagir();
+      caverna.atualizaCaverna();
+      jogo.printa(caverna);
+      tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
       String movements = tk.retrieveMovements();
 //      Scanner sc = new Scanner(System.in);
       for (int i = 0; i < movements.length(); i++) {
 //      for (int i = 0; ; i++) {
 //    	  String comando = sc.next();
-    	  jogo.executar(caverna, heroi, movements.charAt(i));
-//    	  jogo.executar(caverna, heroi, comando.charAt(0));
-    	  caverna.cave[heroi.getLinha()][heroi.getColuna()].setVisitado(true);
-    	  caverna.cave[heroi.getLinha()][heroi.getColuna()].interagir();
+    	  jogo.executar(caverna, movements.charAt(i));
+//    	  jogo.executar(caverna, jogo.heroi, comando.charAt(0));
     	  caverna.atualizaCaverna();
-//    	  jogo.printa(caverna);
-    	  tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
-    	  if (heroi.getLinha() == 0 && heroi.getColuna() == 0 && heroi.isOuro()) {
+    	  jogo.printa(caverna);
+    	  tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
+    	  if (jogo.getHeroi().getLinha() == 0 && jogo.getHeroi().getColuna() == 0 && jogo.getHeroi().isOuro()) {
     		  jogo.setStatus('w');
     		  jogo.setPontuacao(jogo.getPontuacao() + 1000);
     	  }
@@ -72,7 +71,7 @@ public class AppWumpus {
     		  break;
       }
 //      sc.close();
-      tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
+      tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
       if (jogo.getStatus() == 'w')
     	  System.out.println("Voce ganhou =D !!!");
       else if (jogo.getStatus() == 'n')

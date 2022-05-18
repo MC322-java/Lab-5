@@ -2,21 +2,20 @@ package pt.c40task.l05wumpus.componentes;
 
 import java.util.Random;
 
+import pt.c40task.l05wumpus.Caverna;
+import pt.c40task.l05wumpus.Montador;
+
 public class Heroi extends Componente{
 
 	private boolean flecha;
 	private boolean engatilhada; 
 	private boolean ouro;
-	private int linha;
-	private int coluna;
 	
-	public Heroi(int linha, int coluna) {
-		super('P', 3);
+	public Heroi(int linha, int coluna, Caverna caverna) {
+		super('P', 3, linha, coluna, caverna);
 		this.flecha = true;
 		this.engatilhada = false;
 		this.ouro = false;
-		this.linha = linha;
-		this.coluna = coluna;
 	}
 
 	public int atacar() {
@@ -32,6 +31,36 @@ public class Heroi extends Componente{
 //	public void interagir() {
 //		System.out.println("O heroi esta na casa (" + (this.linha + 1) + ", " + (this.coluna + 1) + ")");
 //	}
+	
+	public boolean move(char movimento) {
+		int novaLinha = this.getLinha();
+		int novaColuna = this.getColuna();
+		switch (movimento) {
+			case 'w':
+				novaLinha--;
+				break;
+			case 's':
+				novaLinha++;
+				break;
+			case 'a':
+				novaColuna--;
+				break;
+			case 'd':
+				novaColuna++;
+				break;
+			default:
+				break;
+		}
+		if (!Montador.posicaoValida(novaLinha, novaColuna)) {
+			System.out.println("Movimento invalido");
+			return false;
+		}
+		this.remove();
+		this.setLinha(novaLinha);
+		this.setColuna(novaColuna);
+		this.adiciona();
+		return true;
+	}
 	
 	// Getters e Setters
 	public boolean isEngatilhada() {
@@ -56,22 +85,6 @@ public class Heroi extends Componente{
 
 	public void setOuro(boolean ouro) {
 		this.ouro = ouro;
-	}
-
-	public int getLinha() {
-		return linha;
-	}
-
-	public void setLinha(int linha) {
-		this.linha = linha;
-	}
-
-	public int getColuna() {
-		return coluna;
-	}
-
-	public void setColuna(int coluna) {
-		this.coluna = coluna;
 	}
 }
 	

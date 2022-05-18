@@ -1,9 +1,11 @@
 package pt.c40task.l05wumpus.componentes;
 
+import pt.c40task.l05wumpus.Caverna;
+
 public class Ouro extends Componente{
 
-	public Ouro() {
-		super('O', 4);
+	public Ouro(int linha, int coluna, Caverna caverna) {
+		super('O', 4, linha, coluna, caverna);
 	}
 	
 	@Override

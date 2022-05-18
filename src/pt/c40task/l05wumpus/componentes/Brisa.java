@@ -1,9 +1,11 @@
 package pt.c40task.l05wumpus.componentes;
 
+import pt.c40task.l05wumpus.Caverna;
+
 public class Brisa extends Componente {
 	
-	public Brisa() {
-		super('b', 1);
+	public Brisa(int linha, int coluna, Caverna caverna) {
+		super('b', 1, linha, coluna, caverna);
 	}
 	
 	@Override

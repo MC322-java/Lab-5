@@ -1,12 +1,10 @@
 package pt.c40task.l05wumpus;
 
-import pt.c40task.l05wumpus.componentes.*;
-
 public class Caverna {
 
-	public Salas cave[][];
+	private Salas salas[][];
 	
-	public char board[][] = {
+	private char board[][] = {
 			{'-','-','-','-'},
 			{'-','-','-','-'},
 			{'-','-','-','-'},
@@ -14,46 +12,33 @@ public class Caverna {
 		};
 		
 	public void criarCave() {
-		cave =  new Salas[4][4];
+		setSalas(new Salas[4][4]);
 		for(int i = 0; i < 4; i++)
 			for(int j = 0; j < 4; j++)
-					cave[i][j] = new Salas();
+					getSalas()[i][j] = new Salas(i, j, this);
 	}
 	
 	public void atualizaCaverna() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				this.board[i][j] = cave[i][j].printaSala();
+				this.getBoard()[i][j] = getSalas()[i][j].printaSala();
 			}
 		}
 	}
-	
-	public void setSala(int linha, int coluna, char tipo) {
-		Componente novo = null;
-		switch (tipo) {
-			case 'b':
-				novo = new Brisa();
-				break;
-			case 'B':
-				novo = new Buraco();
-				break;
-			case 'f':
-				novo = new Fedor();
-				break;
-			case 'P':
-				novo = new Heroi(linha, coluna);
-				break;
-			case 'O':
-				novo = new Ouro();
-				break;
-			case 'W':
-				novo = new Wumpus();
-				break;
-			default: // _
-				break;
-		}
-		// fazer a brisa e o fedor separado
-		if (novo != null)
-			this.cave[linha][coluna].push_back(novo);
+
+	public Salas[][] getSalas() {
+		return salas;
+	}
+
+	public void setSalas(Salas salas[][]) {
+		this.salas = salas;
+	}
+
+	public char[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(char board[][]) {
+		this.board = board;
 	}
 }
