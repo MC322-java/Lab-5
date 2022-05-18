@@ -34,28 +34,28 @@ public class ControleJogo {
 		if (comando == 'w') {
 			// cima
 			if (!valido(heroi.getLinha() - 1, heroi.getColuna())) return;
-			caverna.cave[heroi.getLinha()][heroi.getColuna()].pop_back();
+			caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('P');
 			heroi.setLinha(heroi.getLinha() - 1);
 			caverna.cave[heroi.getLinha()][heroi.getColuna()].push_back(heroi);
 			this.pontuacao -= 15;
 		} else if (comando == 's') {
 			// baixo
 			if (!valido(heroi.getLinha() + 1, heroi.getColuna())) return;
-			caverna.cave[heroi.getLinha()][heroi.getColuna()].pop_back();
+			caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('P');
 			heroi.setLinha(heroi.getLinha() + 1);
 			caverna.cave[heroi.getLinha()][heroi.getColuna()].push_back(heroi);
 			this.pontuacao -= 15;
 		} else if (comando == 'a') {
 			// esquerda
 			if (!valido(heroi.getLinha(), heroi.getColuna() - 1)) return;
-			caverna.cave[heroi.getLinha()][heroi.getColuna()].pop_back();
+			caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('P');
 			heroi.setColuna(heroi.getColuna() - 1);
 			caverna.cave[heroi.getLinha()][heroi.getColuna()].push_back(heroi);
 			this.pontuacao -= 15;
 		} else if (comando == 'd') {
 			// direita
 			if (!valido(heroi.getLinha(), heroi.getColuna() + 1)) return;
-			caverna.cave[heroi.getLinha()][heroi.getColuna()].pop_back();
+			caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('P');
 			heroi.setColuna(heroi.getColuna() + 1);
 			caverna.cave[heroi.getLinha()][heroi.getColuna()].push_back(heroi);
 			this.pontuacao -= 15;

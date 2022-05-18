@@ -39,7 +39,6 @@ public class AppWumpus {
 //	  };
       Caverna caverna = Montador.montaCaverna(cave);
       Heroi heroi = new Heroi(0, 0);
-      caverna.cave[0][0].push_back(heroi);
 	  caverna.cave[0][0].setVisitado(true);
 	  caverna.cave[0][0].interagir();
 	  caverna.atualizaCaverna();
