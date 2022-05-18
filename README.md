@@ -2,11 +2,8 @@
  * [Código - Mundo de Wumpus](https://github.com/MC322-java/Lab-5/tree/main/src/pt/c40task/l05wumpus)
 
 # Alunos
-  * Andreas Cisi Ramos
-  * 246932
-
-  * Luiz Fernando Batista Morato
-  * 223406
+  * Andreas Cisi Ramos (246932)
+  * Luiz Fernando Batista Morato (223406)
  
 ## Cursos
   * Engenharia da Computação (34)
