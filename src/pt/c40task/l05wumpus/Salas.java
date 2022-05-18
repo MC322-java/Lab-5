@@ -10,12 +10,12 @@ public class Salas {
 	private ArrayList<Componente> componentes;
 	
 	public Salas() {
-		this.componentes = new ArrayList<Componente>();
+		this.setComponentes(new ArrayList<Componente>());
 		this.visitado = false;
 	}
 	
 	public Salas(ArrayList<Componente> a) {
-		this.componentes = a;
+		this.setComponentes(a);
 	}
 	
 	public char printaSala() {
@@ -23,35 +23,35 @@ public class Salas {
 			return '-';
 		Componente melhor = new Componente();
 		int max = -1;
-		for (int i = 0; i < componentes.size(); i++) {
-			if (componentes.get(i).getPeso() > max) {
-				max = componentes.get(i).getPeso();
-				melhor = componentes.get(i);
+		for (int i = 0; i < getComponentes().size(); i++) {
+			if (getComponentes().get(i).getPeso() > max) {
+				max = getComponentes().get(i).getPeso();
+				melhor = getComponentes().get(i);
 			}
 		}
 		return melhor.getID();
 	}
 	
 	public void interagir() {
-		if (this.componentes.size() == 1 && this.componentes.get(0).getID() == 'P') {
+		if (this.getComponentes().size() == 1 && this.getComponentes().get(0).getID() == 'P') {
 			Componente c = new Componente();
 			c.interagir();
 			return;
 		}
-		for (Componente c : this.componentes) {
+		for (Componente c : this.getComponentes()) {
 			if (c.getID() != 'P') 
 				c.interagir();
 		}
 	}
 	
 	public void printaComponentes() {
-		for (Componente c : this.componentes) {
+		for (Componente c : this.getComponentes()) {
 			System.out.print(c.getID() + " ");
 		}
 	}
 	
 	public boolean tem(char ch) {
-		for (Componente c : this.componentes) {
+		for (Componente c : this.getComponentes()) {
 			if (c.getID() == ch)
 				return true;
 		}
@@ -60,26 +60,34 @@ public class Salas {
 	
 	public void remove(char ch) {
 		int idx = -1;
-		for (Componente c : this.componentes) {
+		for (Componente c : this.getComponentes()) {
 			if (c.getID() == ch) {
-				idx = this.componentes.indexOf(c);
+				idx = this.getComponentes().indexOf(c);
 				break;
 			}
 		}
 		if (idx != -1)
-			this.componentes.remove(idx);
+			this.getComponentes().remove(idx);
 	}
 	
 	public void pop_back() {
-		if (!this.componentes.isEmpty())
-			componentes.remove(this.componentes.size() - 1);
+		if (!this.getComponentes().isEmpty())
+			getComponentes().remove(this.getComponentes().size() - 1);
 	}
 	
 	public void push_back(Componente c) {
-		this.componentes.add(c);
+		this.getComponentes().add(c);
 	}
 	
 	public void setVisitado(boolean v) {
 		visitado = v;
+	}
+
+	public ArrayList<Componente> getComponentes() {
+		return componentes;
+	}
+
+	public void setComponentes(ArrayList<Componente> componentes) {
+		this.componentes = componentes;
 	}
 }

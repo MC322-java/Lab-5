@@ -43,6 +43,9 @@ public class AppWumpus {
 	  caverna.cave[0][0].interagir();
 	  caverna.atualizaCaverna();
       ControleJogo jogo = new ControleJogo();
+      if (jogo.cavernaValida(caverna)) {
+    	  System.out.println("Caverna invalida");
+      }
 //      jogo.printa(caverna);
       tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
       String movements = tk.retrieveMovements();

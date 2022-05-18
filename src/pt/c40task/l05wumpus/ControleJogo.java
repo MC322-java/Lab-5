@@ -19,6 +19,25 @@ public class ControleJogo {
 		return false;
 	}
 	
+	public boolean cavernaValida(Caverna caverna) {
+		int cntB = 0, cntP = 0, cntW = 0, cntO = 0;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				for (Componente c : caverna.cave[i][j].getComponentes()) {
+					if (c.getID() == 'B')
+						cntB++;
+					if (c.getID() == 'P')
+						cntP++;
+					if (c.getID() == 'W')
+						cntW++;
+					if (c.getID() == 'O')
+						cntO++;
+				}
+			}
+		}
+		return 2 <= cntB && cntB <= 3 && cntP == 1 && cntW == 1 && cntO == 1;
+	}
+	
 	public void printa(Caverna caverna) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -72,6 +91,8 @@ public class ControleJogo {
 			} else {
 				System.out.println("Nao tem ouro nesta sala\n");
 			}
+		} else {
+			System.out.println("Comando invalido");
 		}
 		if (caverna.cave[heroi.getLinha()][heroi.getColuna()].tem('B')) {
 			this.status = 'n';
@@ -81,12 +102,13 @@ public class ControleJogo {
 			if (heroi.isEngatilhada() && heroi.atacar() == 1) {
 				System.out.println("Voce matou o Wumpus");
 				caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('W'); // remove o wumpus
-				this.pontuacao += 500; // ganha pontuacao
+				this.pontuacao += 400; // ganha pontuacao
 			} else {
 				this.status = 'n';
-				this.pontuacao -= 1000;
+				this.pontuacao -= (1000 + 100 * (heroi.isEngatilhada() ? 1 : 0));
 			}
 		} else if (heroi.isEngatilhada()) {
+			this.pontuacao -= 100;
 			heroi.setEngatilhada(false);
 			heroi.setFlecha(false);
 		}
