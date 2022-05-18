@@ -18,6 +18,14 @@
 # 3. Delegar o máximo relacionado a cada componente
 
 # 4. Encapsulamento
+~~~
+ public class Heroi extends Componente{
+
+     private boolean flecha;
+     private boolean engatilhada; 
+     private boolean ouro;
+
+~~~
 
 # 5. Polimorfismo
 
