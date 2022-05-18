@@ -21,5 +21,5 @@
 
 # 5. Polimorfismo
 
-# 6. Fácul expansão
+# 6. Fácil expansão
  
