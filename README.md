@@ -1,5 +1,5 @@
 # Lab05 - Mundo de Wumpus
- *[Código - Mundo de Wumpus](https://github.com/MC322-java/Lab-5/tree/main/src/pt/c40task/l05wumpus)
+ * [Código - Mundo de Wumpus](https://github.com/MC322-java/Lab-5/tree/main/src/pt/c40task/l05wumpus)
 
 # Alunos
   * Andreas Cisi Ramos
