@@ -44,8 +44,8 @@ public class AppWumpus {
 	  caverna.cave[0][0].interagir();
 	  caverna.atualizaCaverna();
       ControleJogo jogo = new ControleJogo();
-      
-      jogo.printa(caverna);
+//      jogo.printa(caverna);
+      tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
       String movements = tk.retrieveMovements();
 //      Scanner sc = new Scanner(System.in);
       for (int i = 0; i < movements.length(); i++) {
@@ -56,7 +56,8 @@ public class AppWumpus {
     	  caverna.cave[heroi.getLinha()][heroi.getColuna()].setVisitado(true);
     	  caverna.cave[heroi.getLinha()][heroi.getColuna()].interagir();
     	  caverna.atualizaCaverna();
-    	  jogo.printa(caverna);
+//    	  jogo.printa(caverna);
+    	  tk.writeBoard(caverna.board, jogo.getPontuacao(), jogo.getStatus());
     	  if (heroi.getLinha() == 0 && heroi.getColuna() == 0 && heroi.isOuro()) {
     		  jogo.setStatus('w');
     		  jogo.setPontuacao(jogo.getPontuacao() + 1000);
