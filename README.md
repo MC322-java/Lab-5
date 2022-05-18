@@ -24,7 +24,15 @@
 
 ![image](https://user-images.githubusercontent.com/82724293/169167932-fe155cab-8a3a-4892-ac86-a746bac58d37.png)
 
-# 2. Distribuição da lógica do jogo
+# 2. Distribuição de lógica pelas classes
+  * Foi possível destribuir as tarefas pelas classes para não sobrecarregar apenas uma classe. Por exemplo, a classe ControleJogo detem o papel de controlar a pontuação e o status do Jogo recebendo os movimentos e controlando o Herói para executá-los, além de saber quando o Jogo é valido de ser iniciado ou não.
+  
+![image](https://user-images.githubusercontent.com/82724293/169170792-1c783a5f-22b9-4aa5-a91a-4eaba08e577f.png)
+
+  * Outro exemplo seria a classe Montador, que se preocupa apenas em construir a caverna e adicionar os componentes correspondentes em cada Sala, deixando assim para o as classes exercerem suas funções.
+
+![image](https://user-images.githubusercontent.com/82724293/169171069-3e5bd372-641c-4640-86f7-c32c4c482a40.png)
+
 
 # 3. Delegar o máximo relacionado a cada componente
   * Usando de exemplo a classe Herói, foi colocado o máximo de métodos que estão relacionados com ele nessa classe, o herói que se move, coleta o ouro, equipa a flecha, sabe se tem flecha ou não, ataca o Wumpus, por mais que o Controle de jogo pegue a informação que ele acertou ou errou a flecha, ele que tem 50% de chance de matar o Wumpus.
