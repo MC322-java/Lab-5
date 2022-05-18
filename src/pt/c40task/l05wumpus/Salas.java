@@ -32,13 +32,12 @@ public class Salas {
 	}
 	
 	public void interagir() {
-		if (this.getComponentes().size() == 1 && this.getComponentes().get(0).getID() == 'P') {
-			Componente c = new Componente();
-			c.interagir();
+		if (this.getComponentes().size() == 2 && componentes.get(1).getID() == 'P') {
+			componentes.get(0).interagir();
 			return;
 		}
 		for (Componente c : this.getComponentes()) {
-			if (c.getID() != 'P') 
+			if (c.getID() != 'P' && c.getID() != '#') 
 				c.interagir();
 		}
 	}

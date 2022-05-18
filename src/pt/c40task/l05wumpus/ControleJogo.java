@@ -53,45 +53,35 @@ public class ControleJogo {
 	
 	public void executar(Caverna caverna, char comando) {
 		if (comando == 'w' || comando == 's' || comando == 'a' || comando == 'd') {
-			if (getHeroi().move(comando))
+			if (heroi.move(comando))
 				this.pontuacao -= 15;
 		} else if (comando == 'k') {
-			// equipa flecha
-			if (getHeroi().isFlecha()) getHeroi().setEngatilhada(true);
-			else System.out.println("Voce nao tem flecha\n");
-			return;
+			heroi.engatilha();
 		} else if (comando == 'c') {
-			// coleta o ouro
-			if (caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].tem('O')) {
-				caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].remove('O');
-				getHeroi().setOuro(true);
-			} else {
-				System.out.println("Nao tem ouro nesta sala\n");
-			}
+			heroi.coletaOuro();
 		} else {
 			System.out.println("Comando invalido");
 		}
-		if (caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].tem('B')) {
+		if (caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].tem('B')) {
 			this.status = 'n';
 			this.pontuacao -= 1000;
 		}
-		if (caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].tem('W')) {
-			if (getHeroi().isEngatilhada() && getHeroi().atacar() == 1) {
+		if (caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].tem('W')) {
+			if (heroi.isEngatilhada() && heroi.atacar() == 1) {
 				System.out.println("Voce matou o Wumpus");
-				caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].remove('W'); // remove o wumpus
+				caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].remove('W'); // remove o wumpus
 				this.pontuacao += 400; // ganha pontuacao
 			} else {
 				this.status = 'n';
-				this.pontuacao -= (1000 + 100 * (getHeroi().isEngatilhada() ? 1 : 0));
+				this.pontuacao -= (1000 + 100 * (heroi.isEngatilhada() ? 1 : 0));
 			}
-		} else if (getHeroi().isEngatilhada()) {
+		} else if (heroi.isEngatilhada()) {
+			heroi.perdeFlecha();
 			this.pontuacao -= 100;
-			getHeroi().setEngatilhada(false);
-			getHeroi().setFlecha(false);
 		}
-		if (!caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].isVisitado())
-			caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].interagir();
-		caverna.getSalas()[getHeroi().getLinha()][getHeroi().getColuna()].setVisitado(true);
+		if (!caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].isVisitado())
+			caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].interagir();
+		caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].setVisitado(true);
 	}
 	
 	// Getters e Setters

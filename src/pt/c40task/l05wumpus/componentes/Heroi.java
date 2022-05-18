@@ -62,6 +62,30 @@ public class Heroi extends Componente{
 		return true;
 	}
 	
+	public void engatilha() {
+		if (!isFlecha()) {
+			System.out.println("Voce nao pode engatilhar pois nao possui uma flecha");
+		} else {
+			System.out.println("Voce engatilhou a flecha!");
+			setEngatilhada(true);
+		}
+	}
+	
+	public void coletaOuro() {
+		if (!caverna.getSalas()[linha][coluna].tem('O')) {
+			System.out.println("Voce nao pode coletar o ouro porque ele nao esta nessa sala");
+		} else {
+			System.out.println("Voce coletou o ouro!");
+			caverna.getSalas()[linha][coluna].remove('O');
+		}
+	}
+	
+	public void perdeFlecha() {
+		setFlecha(false);
+		setEngatilhada(false);
+		System.out.println("Voce perdeu a flecha :(");
+	}
+	
 	// Getters e Setters
 	public boolean isEngatilhada() {
 		return engatilhada;
