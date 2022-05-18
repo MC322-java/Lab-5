@@ -82,7 +82,6 @@ public class ControleJogo {
 				System.out.println("Voce matou o Wumpus");
 				caverna.cave[heroi.getLinha()][heroi.getColuna()].remove('W'); // remove o wumpus
 				this.pontuacao += 500; // ganha pontuacao
-				System.out.println("PONTUACAO: " + this.pontuacao);
 			} else {
 				this.status = 'n';
 				this.pontuacao -= 1000;
