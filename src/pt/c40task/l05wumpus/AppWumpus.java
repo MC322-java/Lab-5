@@ -37,40 +37,54 @@ public class AppWumpus {
 //			  {"4", "3", "_"},
 //			  {"4", "4", "O"}
 //	  };
+//      arquivoMovimentos = "alksdjf";
       Caverna caverna = new Caverna();
       Montador.montaCaverna(caverna, cave);
 	  caverna.atualizaCaverna();
       ControleJogo jogo = new ControleJogo(new Heroi(0, 0, caverna));
-      if (jogo.cavernaValida(caverna)) {
-    	  System.out.println("Caverna invalida");
-      }
       caverna.getSalas()[0][0].setVisitado(true);
       caverna.getSalas()[0][0].interagir();
       caverna.atualizaCaverna();
+      String nome = "Alcebiades";
+      if (!jogo.cavernaValida(caverna)) {
+    	  System.out.println("Caverna invalida");
+    	  return;
+      }
+      boolean interativo = (arquivoMovimentos != null);
+      if (interativo) {
+    	  System.out.println("=== Caverna");
+    	  System.out.print("Digite seu nome: ");
+    	  nome = jogo.scanner();
+      }
       jogo.printa(caverna);
       tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
       String movements = tk.retrieveMovements();
-//      Scanner sc = new Scanner(System.in);
-      for (int i = 0; i < movements.length(); i++) {
-//      for (int i = 0; ; i++) {
-//    	  String comando = sc.next();
-    	  jogo.executar(caverna, movements.charAt(i));
-//    	  jogo.executar(caverna, jogo.heroi, comando.charAt(0));
-    	  caverna.atualizaCaverna();
-    	  jogo.printa(caverna);
-    	  tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
-    	  if (jogo.getHeroi().getLinha() == 0 && jogo.getHeroi().getColuna() == 0 && jogo.getHeroi().isOuro()) {
-    		  jogo.setStatus('w');
-    		  jogo.setPontuacao(jogo.getPontuacao() + 1000);
+      if (interativo) {
+    	  while (true) {
+    		  String comando = jogo.scanner();
+    		  jogo.executar(caverna, comando.charAt(0));
+    		  caverna.atualizaCaverna();
+    		  jogo.printa(caverna);
+	    	  tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
+	    	  System.out.println("Jogador: " + nome);
+	    	  System.out.println("Pontuacao: " + jogo.getPontuacao());
+	    	  System.out.println("Status: " + jogo.getStatus());
+	    	  if (movements.charAt(0) == 'q' || jogo.getStatus() != 'x')	
+	    		  break;
     	  }
-    	  System.out.println("Pontuacao: " + jogo.getPontuacao());
-    	  System.out.println("Status: " + jogo.getStatus());
-//    	  if (comando.charAt(0) == 'q' || jogo.getStatus() != 'x')
-//    		  break;
-    	  if (movements.charAt(0) == 'q' || jogo.getStatus() != 'x')
-    		  break;
+      } else {
+	      for (int i = 0; i < movements.length(); i++) {
+	    	  jogo.executar(caverna, movements.charAt(i));
+	    	  caverna.atualizaCaverna();
+	    	  jogo.printa(caverna);
+	    	  tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
+	    	  System.out.println("Jogador: " + nome);
+	    	  System.out.println("Pontuacao: " + jogo.getPontuacao());
+	    	  System.out.println("Status: " + jogo.getStatus());
+	    	  if (movements.charAt(0) == 'q' || jogo.getStatus() != 'x')
+	    		  break;
+	      }
       }
-//      sc.close();
       tk.writeBoard(caverna.getBoard(), jogo.getPontuacao(), jogo.getStatus());
       if (jogo.getStatus() == 'w')
     	  System.out.println("Voce ganhou =D !!!");

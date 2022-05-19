@@ -39,6 +39,7 @@ public abstract class Montador {
 				novo.adiciona();
 			}
 		}
+		caverna.atualizaCaverna();
 		return caverna;
 	}
 	

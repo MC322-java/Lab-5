@@ -1,5 +1,7 @@
 package pt.c40task.l05wumpus;
 
+import java.util.Scanner;
+
 import pt.c40task.l05wumpus.componentes.*;
 
 public class ControleJogo {
@@ -44,8 +46,6 @@ public class ControleJogo {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				System.out.print(caverna.getBoard()[i][j]);
-//				caverna.getSalas()[i][j].printaComponentes();
-//				System.out.println();
 			}
 			System.out.println();
 		}
@@ -57,6 +57,7 @@ public class ControleJogo {
 				this.pontuacao -= 15;
 		} else if (comando == 'k') {
 			heroi.engatilha();
+			return;
 		} else if (comando == 'c') {
 			heroi.coletaOuro();
 		} else {
@@ -81,7 +82,18 @@ public class ControleJogo {
 		}
 		if (!caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].isVisitado())
 			caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].interagir();
+		if (heroi.getLinha() == 0 && heroi.getColuna() == 0 && heroi.isOuro()) {
+			this.status = 'w';
+			this.pontuacao += 1000;
+		}
 		caverna.getSalas()[heroi.getLinha()][heroi.getColuna()].setVisitado(true);
+		caverna.atualizaCaverna();
+	}
+	
+	public String scanner() {
+		Scanner sc = new Scanner(System.in);
+		String eita = sc.nextLine();
+		return eita;
 	}
 	
 	// Getters e Setters
